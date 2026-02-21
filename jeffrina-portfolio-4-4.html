@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeffrina V — Data Analyst Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:     #0B1D35;
+            --navy-mid: #132B4A;
+            --navy-s:   #1E3A5F;
+            --gold:     #C8A84B;
+            --gold-lt:  #E5C97A;
+            --gold-pale:#FBF6EA;
+            --cream:    #F7F5F0;
+            --white:    #FFFFFF;
+            --text:     #1C2B3A;
+            --muted:    #637083;
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+        /* ── NAV ─────────────────────────────── */
+        nav{
+            position:fixed;top:0;width:100%;z-index:1000;
+            background:rgba(11,29,53,0.97);
+            backdrop-filter:blur(14px);
+            border-bottom:1px solid rgba(200,168,75,0.18);
+        }
+        .nav-inner{
+            max-width:1280px;margin:0 auto;
+            padding:0 24px;height:60px;
+            display:flex;align-items:center;justify-content:space-between;
+        }
+        .nav-brand{
+            font-family:'Cormorant Garamond',serif;
+            font-size:1.35rem;font-weight:700;
+            color:var(--gold);text-decoration:none;letter-spacing:.05em;
+            white-space:nowrap;
+        }
+        /* ── OVAL PILL NAV ───────────────────── */
+        .nav-links{display:flex;list-style:none;gap:5px;flex-wrap:nowrap;align-items:center;}
+        .nav-links a{
+            color:rgba(255,255,255,0.62);
+            text-decoration:none;font-size:.64rem;font-weight:600;
+            letter-spacing:.09em;text-transform:uppercase;
+            padding:5px 13px;
+            border-radius:999px;
+            border:1px solid transparent;
+            transition:all .22s cubic-bezier(.4,0,.2,1);
+            white-space:nowrap;
+            position:relative;
+        }
+        .nav-links a:hover{
+            color:var(--gold);
+            border-color:rgba(200,168,75,.35);
+            background:rgba(200,168,75,.08);
+        }
+        .nav-links a.active{
+            color:var(--navy);
+            background:var(--gold);
+            border-color:var(--gold);
+            font-weight:700;
+            box-shadow:0 2px 12px rgba(200,168,75,.35);
+        }
+        /* hamburger */
+        .ham-btn{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px;}
+        .ham-btn span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;transition:all .25s;}
+        @media(max-width:820px){
+            .ham-btn{display:flex;}
+            .nav-links{
+                display:none;position:absolute;top:100%;left:0;right:0;
+                background:var(--navy);flex-direction:column;align-items:flex-start;
+                padding:12px 20px 16px;gap:4px;border-top:1px solid rgba(200,168,75,.15);
+                box-shadow:0 8px 32px rgba(0,0,0,.4);
+            }
+            .nav-links.open{display:flex;}
+            .nav-links a{padding:8px 14px;font-size:.72rem;width:100%;}
+        }
+
+        /* ── SPA PAGES ───────────────────────── */
+        .pg{display:none;min-height:100vh;padding-top:60px;animation:pgIn .35s ease both;}
+        .pg.active{display:block;}
+        #pg-overview.active{display:flex;}
+        /* Typewriter cursor */
+        .type-cursor{
+            display:inline-block;color:var(--gold);font-weight:300;
+            animation:blink .8s step-end infinite;margin-left:1px;
+        }
+        @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+        @keyframes pgIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+        /* ── OPEN TO WORK BADGE ─────────────── */
+        .open-badge{
+            display:inline-flex;align-items:center;gap:7px;
+            background:rgba(34,197,94,.12);
+            border:1px solid rgba(34,197,94,.35);
+            color:rgb(134,239,172);
+            font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+            padding:5px 14px;border-radius:999px;margin:8px 0 18px;
+        }
+        .open-dot{
+            width:7px;height:7px;border-radius:50%;
+            background:rgb(34,197,94);
+            box-shadow:0 0 0 3px rgba(34,197,94,.25);
+            animation:pulse-dot 1.8s ease infinite;
+            flex-shrink:0;
+        }
+        @keyframes pulse-dot{
+            0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.25);}
+            50%{box-shadow:0 0 0 6px rgba(34,197,94,.08);}
+        }
+
+        /* ── OVERVIEW ────────────────────────── */
+        #pg-overview{
+            background:linear-gradient(148deg,var(--navy) 0%,var(--navy-mid) 55%,#1e4060 100%);
+            flex-direction:column;align-items:center;justify-content:center;
+            text-align:center;padding:70px 24px 60px;
+        }
+
+        /* JV Avatar */
+        .jv-avatar{
+            width:148px;height:148px;border-radius:50%;
+            background:linear-gradient(135deg,#1a3a6c 0%,#0B1D35 100%);
+            border:3px solid var(--gold);
+            display:flex;align-items:center;justify-content:center;
+            margin-bottom:26px;
+            box-shadow:0 0 0 7px rgba(200,168,75,.12),0 24px 56px rgba(0,0,0,.45);
+            flex-shrink:0;
+        }
+        .jv-avatar-inner{
+            display:flex;flex-direction:column;align-items:center;line-height:1;
+        }
+        .jv-initials{
+            font-family:'Cormorant Garamond',serif;
+            font-size:2.6rem;font-weight:700;color:var(--gold);letter-spacing:.06em;
+        }
+        .jv-full{
+            font-size:.55rem;font-weight:600;color:rgba(200,168,75,.7);
+            letter-spacing:.14em;text-transform:uppercase;margin-top:4px;
+        }
+
+        .hero-name{
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;
+            color:var(--white);line-height:1.08;margin-bottom:10px;
+        }
+        .hero-name em{color:var(--gold);font-style:normal;}
+        .hero-role{font-size:.92rem;letter-spacing:.06em;color:rgba(255,255,255,.68);margin-bottom:5px;}
+        .hero-loc{
+            font-size:.8rem;color:rgba(255,255,255,.42);
+            margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:5px;
+        }
+
+        /* KPI row — clickable oval pills */
+        .kpi-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;}
+        .kpi{
+            background:rgba(255,255,255,.06);border:1.5px solid rgba(200,168,75,.38);
+            border-radius:50px;padding:12px 26px;text-align:center;min-width:110px;
+            cursor:pointer;text-decoration:none;display:flex;flex-direction:column;align-items:center;
+            transition:all .26s;
+        }
+        .kpi:hover{
+            background:var(--gold);border-color:var(--gold);
+            transform:translateY(-3px);box-shadow:0 8px 22px rgba(200,168,75,.35);
+        }
+        .kpi:hover .kpi-val{color:var(--navy);}
+        .kpi:hover .kpi-lbl{color:rgba(11,29,53,.7);}
+        .kpi-val{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:var(--gold);line-height:1;transition:color .26s;}
+        .kpi-lbl{font-size:.63rem;color:rgba(255,255,255,.52);margin-top:4px;letter-spacing:.07em;text-transform:uppercase;transition:color .26s;}
+
+        /* Social icons */
+        .social-row{display:flex;gap:12px;justify-content:center;margin-bottom:32px;}
+        .soc{
+            width:46px;height:46px;border-radius:50%;
+            border:1.5px solid rgba(200,168,75,.38);background:rgba(200,168,75,.07);
+            display:flex;align-items:center;justify-content:center;
+            color:var(--gold);text-decoration:none;transition:all .26s;
+        }
+        .soc:hover{background:var(--gold);color:var(--navy);transform:translateY(-3px);box-shadow:0 8px 20px rgba(200,168,75,.3);}
+        .soc svg{width:19px;height:19px;fill:currentColor;}
+
+        .hero-summary{
+            max-width:580px;font-size:.97rem;line-height:1.9;
+            color:rgba(255,255,255,.68);margin-bottom:36px;
+        }
+
+        /* CTA Buttons row */
+        .cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+        .btn-primary{
+            display:inline-flex;align-items:center;gap:9px;
+            background:var(--gold);color:var(--navy);
+            padding:13px 32px;border-radius:3px;
+            font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+            text-decoration:none;transition:all .26s;
+            box-shadow:0 4px 18px rgba(200,168,75,.3);border:none;cursor:pointer;
+        }
+        .btn-primary:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,168,75,.44);}
+        .btn-primary svg{width:16px;height:16px;fill:currentColor;}
+        .btn-outline{
+            display:inline-flex;align-items:center;gap:9px;
+            background:transparent;color:var(--gold);
+            padding:12px 28px;border-radius:3px;
+            font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+            text-decoration:none;transition:all .26s;
+            border:1.5px solid rgba(200,168,75,.5);cursor:pointer;
+        }
+        .btn-outline:hover{background:rgba(200,168,75,.1);border-color:var(--gold);transform:translateY(-2px);}
+        .btn-outline svg{width:16px;height:16px;fill:currentColor;}
+
+        /* Overview quick-contact strip */
+        .ov-contact{
+            display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+            padding:28px 24px;
+            background:rgba(255,255,255,.04);
+            border:1px solid rgba(200,168,75,.14);
+            border-radius:12px;max-width:700px;width:100%;
+        }
+        .ov-ct-item{
+            display:flex;align-items:center;gap:9px;
+            color:rgba(255,255,255,.7);text-decoration:none;
+            font-size:.82rem;font-weight:500;transition:color .2s;
+            padding:6px 12px;border-radius:6px;
+        }
+        .ov-ct-item:hover{color:var(--gold);background:rgba(200,168,75,.08);}
+        .ov-ct-item svg{width:16px;height:16px;fill:var(--gold);flex-shrink:0;}
+
+        /* ── PREV / NEXT NAV ─────────────────── */
+        .page-nav{
+            display:flex;justify-content:space-between;align-items:center;
+            max-width:900px;margin:0 auto;padding:0 28px 48px;
+            gap:12px;
+        }
+        .page-nav-center{
+            font-size:.72rem;font-weight:600;letter-spacing:.12em;
+            text-transform:uppercase;color:var(--muted);
+        }
+        .pnav-btn{
+            display:inline-flex;align-items:center;gap:8px;
+            background:var(--navy);color:var(--gold);
+            padding:10px 22px;border-radius:4px;
+            font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+            border:1.5px solid rgba(200,168,75,.3);cursor:pointer;
+            text-decoration:none;transition:all .22s;
+        }
+        .pnav-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+        .pnav-btn svg{width:14px;height:14px;fill:currentColor;}
+        .pnav-btn.invisible{visibility:hidden;pointer-events:none;}
+
+        /* ── INNER WRAPPER ───────────────────── */
+        .wrap{max-width:900px;margin:0 auto;padding:60px 28px 20px;}
+        .sec-head{margin-bottom:44px;}
+        .sec-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+        .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,4vw,2.7rem);font-weight:700;color:var(--navy);line-height:1.15;}
+        .sec-rule{width:44px;height:3px;background:var(--gold);border-radius:2px;margin-top:14px;}
+
+        /* bg alternation */
+        #pg-about      {background:var(--cream);}
+        #pg-education  {background:var(--white);}
+        #pg-experience {background:var(--cream);}
+        #pg-projects   {background:var(--white);}
+        #pg-skills     {background:var(--cream);}
+        #pg-achievements{background:var(--white);}
+        #pg-workshops  {background:var(--cream);}
+        #pg-languages  {background:var(--white);}
+        #pg-hobbies    {background:var(--cream);}
+        #pg-contact    {background:var(--white);}
+
+        /* ── ABOUT ───────────────────────────── */
+        .about-text{font-size:1rem;line-height:1.95;color:#3a4a5c;max-width:700px;}
+        .kpi-mini-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:40px;}
+        .kpi-mini{background:var(--white);border-top:3px solid var(--gold);border-radius:8px;padding:20px;}
+        .kpi-mini-val{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:var(--gold);line-height:1;}
+        .kpi-mini-lbl{font-size:.74rem;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:.06em;}
+
+        /* ── EDUCATION ───────────────────────── */
+        .edu-card{
+            background:var(--cream);border-radius:8px;
+            padding:28px 28px 28px 34px;margin-bottom:20px;
+            border-left:4px solid var(--gold);transition:transform .2s,box-shadow .2s;
+        }
+        .edu-card:hover{transform:translateX(5px);box-shadow:-4px 4px 18px rgba(200,168,75,.11);}
+        .edu-degree{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:700;color:var(--navy);margin-bottom:4px;}
+        .edu-inst{font-size:.92rem;font-weight:600;color:var(--gold);margin-bottom:4px;}
+        .edu-year{font-size:.78rem;color:var(--muted);font-weight:500;margin-bottom:9px;}
+        .edu-detail{font-size:.88rem;color:#4a5568;line-height:1.7;}
+        .badge{
+            display:inline-block;background:var(--navy);color:var(--gold);
+            font-size:.73rem;font-weight:700;padding:4px 13px;
+            border-radius:20px;border:1px solid var(--gold);letter-spacing:.04em;margin-top:11px;
+        }
+
+        /* ── EXPERIENCE ──────────────────────── */
+        .exp-card{
+            background:var(--white);border-radius:8px;padding:28px;
+            margin-bottom:20px;border-left:4px solid var(--navy-mid);transition:box-shadow .22s;
+        }
+        .exp-card:hover{box-shadow:0 8px 28px rgba(11,29,53,.09);}
+        .exp-hd{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:9px;margin-bottom:5px;}
+        .exp-title{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:700;color:var(--navy);}
+        .exp-date{
+            font-size:.72rem;font-weight:600;
+            background:rgba(200,168,75,.12);border:1px solid rgba(200,168,75,.36);
+            color:var(--navy);padding:4px 13px;border-radius:20px;white-space:nowrap;
+        }
+        .exp-co{font-size:.88rem;font-weight:600;color:var(--gold);margin-bottom:13px;}
+        .exp-ul{list-style:none;}
+        .exp-ul li{position:relative;padding-left:18px;margin-bottom:7px;font-size:.88rem;color:#4a5568;line-height:1.65;}
+        .exp-ul li::before{content:'▹';position:absolute;left:0;color:var(--gold);}
+
+        /* ── PROJECTS ────────────────────────── */
+        .proj-card{
+            background:var(--cream);border-radius:8px;padding:26px;
+            margin-bottom:20px;border-top:4px solid var(--navy-mid);transition:all .22s;
+        }
+        .proj-card:hover{border-top-color:var(--gold);box-shadow:0 8px 26px rgba(11,29,53,.08);}
+        .proj-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:5px;}
+        .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 11px;}
+        .tag{font-size:.7rem;font-weight:600;background:var(--navy);color:var(--gold);padding:3px 10px;border-radius:3px;letter-spacing:.05em;}
+        .proj-desc{font-size:.88rem;color:#4a5568;line-height:1.7;}
+
+        /* ── SKILLS ──────────────────────────── */
+        /* ── SKILLS BARS ─────────────────────── */
+        .skills-two-col{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;}
+        @media(max-width:720px){.skills-two-col{grid-template-columns:1fr;}}
+        .skills-bars{background:rgba(255,255,255,.03);border:1px solid rgba(200,168,75,.12);border-radius:14px;padding:24px;}
+        .sk-group-title{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+        .sk-bar-item{margin-bottom:14px;}
+        .sk-bar-head{display:flex;justify-content:space-between;margin-bottom:5px;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.75);}
+        .sk-pct{color:var(--gold);font-weight:700;}
+        .sk-track{height:6px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;}
+        .sk-fill{
+            height:100%;width:0;border-radius:999px;
+            background:linear-gradient(90deg,var(--gold-lt),var(--gold));
+            transition:width 1.1s cubic-bezier(.4,0,.2,1);
+        }
+        .sk-fill.animate{width:var(--w);}
+        .skills-tags-col{display:flex;flex-direction:column;gap:16px;}
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+        .sg{background:var(--navy);border-radius:8px;padding:24px;border-bottom:3px solid var(--gold);}
+        .sg h3{
+            font-family:'Cormorant Garamond',serif;font-size:.86rem;font-weight:700;color:var(--gold);
+            margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(200,168,75,.2);
+            text-transform:uppercase;letter-spacing:.1em;
+        }
+        .stags{display:flex;flex-wrap:wrap;gap:6px;}
+        .stag{
+            font-size:.78rem;color:rgba(255,255,255,.8);background:rgba(255,255,255,.07);
+            border:1px solid rgba(255,255,255,.1);padding:5px 11px;border-radius:4px;
+            font-weight:500;transition:all .18s;cursor:default;
+        }
+        .stag:hover{background:rgba(200,168,75,.18);border-color:var(--gold);color:var(--gold);}
+
+        /* ── ACHIEVEMENTS ────────────────────── */
+        .ach-card{
+            display:flex;gap:16px;align-items:flex-start;
+            background:var(--gold-pale);border:1px solid rgba(200,168,75,.26);
+            border-left:4px solid var(--gold);border-radius:8px;
+            padding:24px 26px;margin-bottom:18px;transition:box-shadow .22s;
+        }
+        .ach-card:hover{box-shadow:0 6px 22px rgba(200,168,75,.13);}
+        .ach-icon{font-size:1.65rem;flex-shrink:0;}
+        .ach-title{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
+        .ach-org{font-size:.78rem;font-weight:600;color:var(--gold);margin-bottom:6px;}
+        .ach-desc{font-size:.86rem;color:#4a5568;line-height:1.65;}
+
+        /* ── WORKSHOPS ───────────────────────── */
+        .ws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:16px;}
+        .ws-card{
+            background:var(--white);border-radius:8px;padding:20px;
+            border-top:3px solid var(--navy-mid);transition:all .22s;
+        }
+        .ws-card:hover{border-top-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.07);}
+        .ws-title{font-family:'Cormorant Garamond',serif;font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:4px;}
+        .ws-org{font-size:.76rem;font-weight:600;color:var(--gold);margin-bottom:6px;}
+        .ws-date{font-size:.72rem;color:var(--muted);}
+
+        /* ── LANGUAGES ───────────────────────── */
+        .lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:16px;}
+        .lang-card{
+            background:var(--navy);border-radius:8px;padding:24px 18px;
+            text-align:center;border-bottom:3px solid var(--gold);transition:transform .2s;
+        }
+        .lang-card:hover{transform:translateY(-4px);}
+        .lang-name{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:700;color:var(--gold);margin-bottom:5px;}
+        .lang-lvl{font-size:.75rem;color:rgba(255,255,255,.58);letter-spacing:.07em;text-transform:uppercase;font-weight:500;}
+
+        /* ── HOBBIES ─────────────────────────── */
+        .hob-row{display:flex;flex-wrap:wrap;gap:12px;}
+        .hob{
+            display:flex;align-items:center;gap:8px;
+            background:var(--white);border:1px solid rgba(11,29,53,.1);
+            border-radius:40px;padding:10px 20px;
+            font-size:.88rem;font-weight:600;color:var(--navy);transition:all .2s;cursor:default;
+        }
+        .hob:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+        .hob-ico{font-size:1rem;}
+
+        /* ── CONTACT ─────────────────────────── */
+        #pg-contact .wrap{padding-bottom:48px;}
+        .ct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px;}
+        .ct-card{
+            display:flex;flex-direction:column;align-items:center;text-align:center;
+            padding:28px 16px;border-radius:8px;border:1px solid rgba(11,29,53,.1);
+            text-decoration:none;color:var(--text);background:var(--cream);transition:all .24s;
+        }
+        .ct-card:hover{
+            background:var(--navy);color:var(--white);border-color:var(--navy);
+            transform:translateY(-4px);box-shadow:0 10px 26px rgba(11,29,53,.18);
+        }
+        .ct-ico{
+            width:50px;height:50px;border-radius:50%;background:var(--navy);
+            display:flex;align-items:center;justify-content:center;
+            margin-bottom:13px;transition:background .24s;
+        }
+        .ct-card:hover .ct-ico{background:var(--gold);}
+        .ct-ico svg{width:21px;height:21px;fill:var(--gold);}
+        .ct-card:hover .ct-ico svg{fill:var(--navy);}
+        .ct-lbl{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+        .ct-card:hover .ct-lbl{color:rgba(255,255,255,.52);}
+        .ct-val{font-size:.85rem;font-weight:600;word-break:break-word;}
+
+        /* ── FOOTER ──────────────────────────── */
+        footer{
+            background:var(--navy);text-align:center;
+            padding:32px 20px;color:rgba(255,255,255,.42);font-size:.8rem;
+        }
+        footer span{color:var(--gold);}
+
+        /* ── SCROLL TOP ──────────────────────── */
+        /* ── FOOTER ─────────────────────────── */
+        footer{
+            background:linear-gradient(to bottom, #061122, #040e1c);
+            border-top:1px solid rgba(200,168,75,.18);
+            padding:40px 24px 30px;text-align:center;
+        }
+        .footer-inner{display:flex;flex-direction:column;align-items:center;gap:10px;}
+        .footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em;}
+        .footer-brand span{color:var(--gold);}
+        .footer-tagline{font-size:.76rem;color:rgba(255,255,255,.45);letter-spacing:.04em;}
+        .footer-socials{display:flex;gap:16px;margin:8px 0;}
+        .footer-socials a{
+            width:38px;height:38px;border-radius:50%;
+            border:1px solid rgba(200,168,75,.25);
+            display:flex;align-items:center;justify-content:center;
+            transition:all .22s;
+        }
+        .footer-socials a svg{width:16px;height:16px;fill:rgba(255,255,255,.5);transition:fill .22s;}
+        .footer-socials a:hover{background:rgba(200,168,75,.12);border-color:var(--gold);}
+        .footer-socials a:hover svg{fill:var(--gold);}
+        .footer-copy{font-size:.7rem;color:rgba(255,255,255,.28);letter-spacing:.03em;}
+
+        #scrollTop{
+            position:fixed;bottom:24px;right:24px;
+            width:40px;height:40px;background:var(--gold);color:var(--navy);
+            border-radius:50%;border:none;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            font-size:.95rem;font-weight:700;opacity:0;pointer-events:none;
+            transition:all .28s;z-index:999;
+            box-shadow:0 4px 14px rgba(200,168,75,.34);
+        }
+        #scrollTop.vis{opacity:1;pointer-events:all;}
+        #scrollTop:hover{background:var(--gold-lt);transform:translateY(-3px);}
+
+        /* ── RESPONSIVE ──────────────────────── */
+        @media(max-width:860px){
+            .nav-links a{font-size:.62rem;padding:4px 7px;}
+        }
+        @media(max-width:600px){
+            .nav-links a{font-size:.58rem;padding:4px 5px;letter-spacing:.04em;}
+            .cta-row{flex-direction:column;align-items:center;}
+            .ov-contact{flex-direction:column;align-items:center;}
+            .page-nav{padding:0 16px 40px;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-brand" onclick="go('overview');return false;">Jeffrina V</a>
+        <button class="ham-btn" id="ham" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="#" onclick="go('overview');return false;"     id="n-overview" class="active">Overview</a></li>
+            <li><a href="#" onclick="go('about');return false;"        id="n-about">About</a></li>
+            <li><a href="#" onclick="go('education');return false;"    id="n-education">Education</a></li>
+            <li><a href="#" onclick="go('experience');return false;"   id="n-experience">Experience</a></li>
+            <li><a href="#" onclick="go('projects');return false;"     id="n-projects">Projects</a></li>
+            <li><a href="#" onclick="go('skills');return false;"       id="n-skills">Skills</a></li>
+            <li><a href="#" onclick="go('achievements');return false;" id="n-achievements">Achievements</a></li>
+            <li><a href="#" onclick="go('workshops');return false;"    id="n-workshops">Workshops</a></li>
+            <li><a href="#" onclick="go('languages');return false;"    id="n-languages">Languages</a></li>
+            <li><a href="#" onclick="go('hobbies');return false;"      id="n-hobbies">Hobbies</a></li>
+            <li><a href="#" onclick="go('contact');return false;"      id="n-contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ══ OVERVIEW ══════════════════════════════════════════════ -->
+<section id="pg-overview" class="pg active">
+
+    <!-- Profile Photo -->
+    <div class="jv-avatar" style="overflow:hidden;padding:0;background:transparent;">
+        <img src="https://i.ibb.co/202Sjqz6/1768154942607.jpg" 
+             alt="Jeffrina V" 
+             style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+    </div>
+
+    <h1 class="hero-name">Jeffrina <em>V</em></h1>
+    <div class="open-badge">
+        <span class="open-dot"></span>
+        Open to Opportunities
+    </div>
+    <p class="hero-role">
+        <span id="type-text"></span><span class="type-cursor">|</span>
+    </p>
+    <p class="hero-loc">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        Coimbatore, Tamil Nadu, India
+    </p>
+
+    <!-- KPIs — clickable oval pills -->
+    <div class="kpi-row">
+        <a class="kpi" href="#" onclick="go('about');return false;" title="View About">
+            <div class="kpi-val">90%</div><div class="kpi-lbl">CGPA</div>
+        </a>
+        <a class="kpi" href="#" onclick="go('experience');return false;" title="View Experience">
+            <div class="kpi-val">2</div><div class="kpi-lbl">Internships</div>
+        </a>
+        <a class="kpi" href="#" onclick="go('projects');return false;" title="View Projects">
+            <div class="kpi-val">2</div><div class="kpi-lbl">Projects</div>
+        </a>
+        <a class="kpi" href="#" onclick="go('achievements');return false;" title="View Achievements">
+            <div class="kpi-val">29</div><div class="kpi-lbl">Certificates</div>
+        </a>
+        <a class="kpi" href="#" onclick="go('education');return false;" title="View Education">
+            <div class="kpi-val">97</div><div class="kpi-lbl">Maths /100</div>
+        </a>
+    </div>
+
+    <!-- Social Icons Only -->
+    <div class="social-row">
+        <a href="https://www.linkedin.com/in/jeffrina-v-39a0aa354" target="_blank" rel="noopener" class="soc" title="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.327-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/Jeffrina-V" target="_blank" rel="noopener" class="soc" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="mailto:jeffrinaviviliya@gmail.com" class="soc" title="Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+        <a href="tel:+918838540526" class="soc" title="Phone">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </a>
+        <a href="https://jeffrina-v.github.io/jeffrina_portfolio.github.io/" target="_blank" rel="noopener" class="soc" title="Old Portfolio">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </a>
+    </div>
+
+    <p class="hero-summary">
+        Aspiring Data Analyst with strong academic performance (CGPA 90%) and hands-on experience at InnoByte Services and Deloitte's virtual programme. Skilled in Python, SQL, Power BI, Tableau, and Excel — passionate about analysing datasets, building dashboards, and delivering data-driven insights that support business decisions.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="cta-row">
+        <a href="https://drive.google.com/uc?export=download&id=1izsRMxQASWVokF1HpN8sp1TRf0LiD8B8" target="_blank" rel="noopener" class="btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download Resume
+        </a>
+        <a href="#" onclick="go('about');return false;" class="btn-outline">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            View Portfolio
+        </a>
+        <a href="#" onclick="go('contact');return false;" class="btn-outline">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Get In Touch
+        </a>
+    </div>
+
+    <!-- Quick contact strip on Overview -->
+    <div class="ov-contact">
+        <a href="mailto:jeffrinaviviliya@gmail.com" class="ov-ct-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            jeffrinaviviliya@gmail.com
+        </a>
+        <a href="tel:+918838540526" class="ov-ct-item">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            +91 88385 40526
+        </a>
+        <a href="https://www.linkedin.com/in/jeffrina-v-39a0aa354" target="_blank" class="ov-ct-item">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.327-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn Profile
+        </a>
+        <a href="https://github.com/Jeffrina-V" target="_blank" class="ov-ct-item">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub Profile
+        </a>
+    </div>
+
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════════════════ -->
+<section id="pg-about" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Who I Am</p>
+            <h2 class="sec-title">About Me</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <p class="about-text">I am Jeffrina V, a B.Sc. Computer Science with Data Analytics student at Sankara College of Science and Commerce, Coimbatore — achieving a CGPA of 90%. I am deeply passionate about harnessing data to solve real-world problems and driving smarter, evidence-based decisions.</p>
+        <p class="about-text" style="margin-top:16px;">My professional journey spans a Data Analyst internship at InnoByte Services (New Delhi) and a Deloitte Australia virtual experience — alongside impactful academic projects including the SahaEzer Disaster Response Platform, which earned III Prize at a national 24-hour hackathon. I was also recognised as Subject Topper in Mathematics with a score of 97/100.</p>
+        <p class="about-text" style="margin-top:16px;">I thrive at the intersection of technology and business insight, continuously upskilling in Python, Tableau, Power BI, and SQL — committed to delivering measurable, data-driven value in every role I take on.</p>
+        <div class="kpi-mini-row">
+            <div class="kpi-mini"><div class="kpi-mini-val">90%</div><div class="kpi-mini-lbl">CGPA</div></div>
+            <div class="kpi-mini"><div class="kpi-mini-val">2</div><div class="kpi-mini-lbl">Experiences</div></div>
+            <div class="kpi-mini"><div class="kpi-mini-val">29</div><div class="kpi-mini-lbl">Certificates</div></div>
+            <div class="kpi-mini"><div class="kpi-mini-val">97</div><div class="kpi-mini-lbl">Maths / 100</div></div>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-about"></div>
+</section>
+
+<!-- ══ EDUCATION ════════════════════════════════════════════ -->
+<section id="pg-education" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Academic Background</p>
+            <h2 class="sec-title">Education</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="edu-card">
+            <div class="edu-degree">B.Sc. Computer Science with Data Analytics</div>
+            <div class="edu-inst">Sankara College of Science and Commerce, Coimbatore</div>
+            <div class="edu-year">2024 – 2027 &nbsp;(Ongoing)</div>
+            <div class="edu-detail">Pursuing a specialised degree integrating core computer science with advanced data analytics — covering Python, SQL, machine learning, statistical analysis, and BI tools such as Power BI and Tableau.</div>
+            <span class="badge">CGPA: 90%</span>
+        </div>
+        <div class="edu-card">
+            <div class="edu-degree">Higher Secondary Certificate (HSC) — Science Stream</div>
+            <div class="edu-inst">Immaculate Matric Higher Secondary School</div>
+            <div class="edu-year">2023 – 2024</div>
+            <div class="edu-detail">Completed the HSC programme in the Science stream, building a strong analytical foundation across Mathematics, Physics, and Chemistry.</div>
+            <span class="badge">Score: 81%</span>
+        </div>
+        <div class="edu-card">
+            <div class="edu-degree">Secondary School Leaving Certificate (SSLC)</div>
+            <div class="edu-inst">Immaculate Matric Higher Secondary School</div>
+            <div class="edu-year">2021 – 2022</div>
+            <div class="edu-detail">Completed secondary education with distinction, demonstrating consistent excellence across all core subjects.</div>
+            <span class="badge">Score: 88%</span>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-education"></div>
+</section>
+
+<!-- ══ EXPERIENCE ═══════════════════════════════════════════ -->
+<section id="pg-experience" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Professional Journey</p>
+            <h2 class="sec-title">Experience</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="exp-card">
+            <div class="exp-hd">
+                <div>
+                    <div class="exp-title">Data Analyst Intern</div>
+                    <div class="exp-co">🏢 InnoByte Services &nbsp;·&nbsp; New Delhi</div>
+                </div>
+                <span class="exp-date">August 2025</span>
+            </div>
+            <ul class="exp-ul">
+                <li>Analysed datasets containing 10,000+ records to uncover trends and actionable insights supporting key business decisions.</li>
+                <li>Applied analytical and problem-solving techniques on real-world structured data to identify patterns and operational opportunities.</li>
+                <li>Built data pipelines for cleaning, transforming, and loading large-scale datasets using Python (Pandas, NumPy).</li>
+                <li>Created interactive dashboards and visual reports in Power BI and Tableau for stakeholder presentations.</li>
+                <li>Wrote optimised SQL queries to extract and aggregate data from relational databases, streamlining reporting processes.</li>
+                <li>Collaborated with cross-functional teams to define KPIs, validate data quality, and deliver analytical outputs on time.</li>
+            </ul>
+        </div>
+        <div class="exp-card">
+            <div class="exp-hd">
+                <div>
+                    <div class="exp-title">Technology Job Simulation — Data Analytics</div>
+                    <div class="exp-co">🏛️ Deloitte Australia &nbsp;·&nbsp; Forage Virtual Experience Programme</div>
+                </div>
+                <span class="exp-date">January 2026</span>
+            </div>
+            <ul class="exp-ul">
+                <li>Completed a structured virtual simulation replicating real-world data analytics and consulting tasks professionally.</li>
+                <li>Used Python to process, clean, and analyse structured datasets simulating a consulting analyst's workflow.</li>
+                <li>Performed forensic data analysis and data classification to assess business operations and identify risk areas.</li>
+                <li>Built Tableau dashboards to visualise client operational data across business units, surfacing efficiency gaps.</li>
+                <li>Applied data-driven reasoning to equality analysis on employee benefit datasets — a core consulting deliverable.</li>
+                <li>Delivered quality outputs independently within industry-standard frameworks under simulated consulting conditions.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-experience"></div>
+</section>
+
+<!-- ══ PROJECTS ══════════════════════════════════════════════ -->
+<section id="pg-projects" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Selected Work</p>
+            <h2 class="sec-title">Projects</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="proj-card">
+            <div class="proj-title">Stock Price Dashboard</div>
+            <div class="tag-row">
+                <span class="tag">Tableau</span>
+                <span class="tag">Data Analysis</span>
+                <span class="tag">Data Visualisation</span>
+            </div>
+            <p class="proj-desc">Designed an interactive Tableau dashboard to visualise live stock market trends, price movements, and moving averages. Enabled users to perform technical analysis and track portfolio performance through intuitive drill-down filters and time-series charts.</p>
+        </div>
+        <div class="proj-card">
+            <div class="proj-title">SahaEzer — Disaster Response Coordination Platform</div>
+            <div class="tag-row">
+                <span class="tag">Web Development</span>
+                <span class="tag">HTML / CSS / JS</span>
+                <span class="tag">Python</span>
+                <span class="tag">🏆 National III Prize</span>
+            </div>
+            <p class="proj-desc">Built a full-stack Disaster Response Coordination Platform bridging the gap between civilians and emergency responders during natural disasters. The platform enables real-time SOS reporting, resource allocation, and responder coordination. Awarded III Prize at the 24-Hours Intelligent Learning Hackathon, Sankara College — January 2026.</p>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-projects"></div>
+</section>
+
+<!-- ══ SKILLS ════════════════════════════════════════════════ -->
+<section id="pg-skills" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Toolkit</p>
+            <h2 class="sec-title">Technical Skills</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="skills-two-col">
+            <!-- LEFT — Progress Bars -->
+            <div class="skills-bars">
+                <h3 class="sk-group-title">Core Proficiency</h3>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>MS Excel</span><span class="sk-pct">90%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:90%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>Tableau</span><span class="sk-pct">85%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:85%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>HTML5 / CSS3</span><span class="sk-pct">88%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:88%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>Power BI</span><span class="sk-pct">80%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:80%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>Python</span><span class="sk-pct">85%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:85%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>SQL</span><span class="sk-pct">78%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:78%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>JavaScript</span><span class="sk-pct">75%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:75%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>C++</span><span class="sk-pct">75%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:75%"></div></div>
+                </div>
+                <div class="sk-bar-item">
+                    <div class="sk-bar-head"><span>Java</span><span class="sk-pct">70%</span></div>
+                    <div class="sk-track"><div class="sk-fill" style="--w:70%"></div></div>
+                </div>
+            </div>
+            <!-- RIGHT — Tag Clouds by Category -->
+            <div class="skills-tags-col">
+                <div class="sg">
+                    <h3>Data Analytics</h3>
+                    <div class="stags">
+                        <span class="stag">Pandas</span><span class="stag">NumPy</span>
+                        <span class="stag">Power BI</span><span class="stag">Tableau</span>
+                        <span class="stag">MS Excel</span><span class="stag">Statistics</span>
+                    </div>
+                </div>
+                <div class="sg">
+                    <h3>AI &amp; Machine Learning</h3>
+                    <div class="stags">
+                        <span class="stag">Deep Learning</span><span class="stag">Machine Learning</span>
+                        <span class="stag">Generative AI</span><span class="stag">Process Mining</span>
+                        <span class="stag">RPA / UiPath</span><span class="stag">BPMN</span>
+                    </div>
+                </div>
+                <div class="sg">
+                    <h3>Web &amp; Databases</h3>
+                    <div class="stags">
+                        <span class="stag">HTML5</span><span class="stag">CSS3</span>
+                        <span class="stag">JavaScript</span><span class="stag">React</span>
+                        <span class="stag">MySQL</span><span class="stag">MongoDB</span><span class="stag">SQL Server</span>
+                    </div>
+                </div>
+                <div class="sg">
+                    <h3>Tools &amp; Platforms</h3>
+                    <div class="stags">
+                        <span class="stag">Jupyter</span><span class="stag">VS Code</span>
+                        <span class="stag">Google Colab</span><span class="stag">GitHub</span>
+                        <span class="stag">Celonis</span><span class="stag">Microsoft Copilot</span>
+                        <span class="stag">Flutter</span>
+                    </div>
+                </div>
+                <div class="sg">
+                    <h3>Soft Skills</h3>
+                    <div class="stags">
+                        <span class="stag">Teamwork</span><span class="stag">Time Management</span>
+                        <span class="stag">Presentation</span><span class="stag">Data Storytelling</span>
+                        <span class="stag">Problem Solving</span><span class="stag">Communication</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-skills"></div>
+</section>
+
+<!-- ══ ACHIEVEMENTS ══════════════════════════════════════════ -->
+<section id="pg-achievements" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Recognition</p>
+            <h2 class="sec-title">Certifications &amp; Achievements</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="ach-card">
+            <div class="ach-icon">🥉</div>
+            <div>
+                <div class="ach-title">III Prize — 24-Hours Intelligent Learning Hackathon</div>
+                <div class="ach-org">Sankara College of Science &amp; Commerce &nbsp;·&nbsp; January 2026</div>
+                <p class="ach-desc">Developed SahaEzer App — a Disaster Response Coordination Platform enabling real-time coordination between civilians and emergency responders during natural disasters. Secured III Prize among national-level teams within a 24-hour build sprint.</p>
+            </div>
+        </div>
+        <div class="ach-card">
+            <div class="ach-icon">🏆</div>
+            <div>
+                <div class="ach-title">Subject Topper Award — Mathematics</div>
+                <div class="ach-org">Sankara College of Science &amp; Commerce &nbsp;·&nbsp; 2025</div>
+                <p class="ach-desc">Achieved 97/100 in Discrete Mathematics for Data Analytics, earning the Subject Topper Award — reflecting exceptional analytical ability in a core data science discipline.</p>
+            </div>
+        </div>
+
+        <!-- ── CERTIFICATES SECTION ── -->
+        <div style="margin-top:48px;">
+            <p class="sec-label" style="margin-bottom:10px;">Certifications</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:var(--navy);margin-bottom:6px;">My Certificates</h3>
+            <div style="width:36px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:28px;"></div>
+
+            <style>
+                .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:18px;}
+                .cert-card{
+                    background:var(--white);border-radius:10px;overflow:hidden;
+                    border:1px solid rgba(200,168,75,.2);
+                    box-shadow:0 3px 14px rgba(0,0,0,.06);
+                    transition:transform .22s,box-shadow .22s;
+                    display:flex;flex-direction:column;
+                }
+                .cert-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(200,168,75,.18);border-color:rgba(200,168,75,.5);}
+                .cert-badge{
+                    height:8px;width:100%;
+                }
+                .cert-body{padding:18px 18px 16px;flex:1;display:flex;flex-direction:column;}
+                .cert-icon{font-size:1.5rem;margin-bottom:10px;}
+                .cert-title{
+                    font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;
+                    color:var(--navy);margin-bottom:5px;line-height:1.35;
+                }
+                .cert-org{font-size:.74rem;font-weight:700;color:var(--gold);margin-bottom:6px;letter-spacing:.03em;}
+                .cert-date{font-size:.7rem;color:var(--muted);margin-top:auto;padding-top:8px;}
+                .cert-tag{
+                    display:inline-block;font-size:.64rem;font-weight:700;
+                    background:var(--navy);color:var(--gold);
+                    padding:2px 9px;border-radius:20px;
+                    margin-top:8px;letter-spacing:.04em;
+                }
+            </style>
+
+            <div class="cert-grid">
+
+                <!-- 1. NoviTech React Bootcamp -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#1a1a2e,#4a7c59);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">⚛️</div>
+                        <div class="cert-title">Building Your First React Application</div>
+                        <div class="cert-org">NoviTech R&amp;D Private Limited</div>
+                        <div class="cert-date">📅 December 28, 2025 &nbsp;·&nbsp; 2-Hour Bootcamp</div>
+                        <span class="cert-tag">Certificate of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 2. NoviTech AI MasterClass -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#1a1a2e,#c0392b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🤖</div>
+                        <div class="cert-title">30 Days MasterClass in Artificial Intelligence</div>
+                        <div class="cert-org">NoviTech R&amp;D Private Limited</div>
+                        <div class="cert-date">📅 June 18 – July 23, 2025</div>
+                        <span class="cert-tag">Certificate of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 3. Celonis – Academic Process Mining Fundamentals -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#000,#444);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">⛏️</div>
+                        <div class="cert-title">Academic Process Mining Fundamentals</div>
+                        <div class="cert-org">Celonis Academy</div>
+                        <div class="cert-date">📅 September 06, 2024</div>
+                        <span class="cert-tag">Foundational · Credly Verified</span>
+                    </div>
+                </div>
+
+                <!-- 4. Celonis – Celonis Foundations -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#000,#666);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🏗️</div>
+                        <div class="cert-title">Celonis Foundations</div>
+                        <div class="cert-org">Celonis Academy</div>
+                        <div class="cert-date">📅 September 04, 2024</div>
+                        <span class="cert-tag">Foundational · Credly Verified</span>
+                    </div>
+                </div>
+
+                <!-- 5. Postulate – Data Science & AI Workshop -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#6a0dad,#9b59b6);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🧠</div>
+                        <div class="cert-title">Free Career Success Workshop on Data Science &amp; AI</div>
+                        <div class="cert-org">POSTULATE</div>
+                        <div class="cert-date">📅 January 10, 2026 &nbsp;·&nbsp; C.No: 3844</div>
+                        <span class="cert-tag">ISO Certified</span>
+                    </div>
+                </div>
+
+                <!-- 6. Postulate – Full Stack Development Workshop -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#6a0dad,#c0392b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">💻</div>
+                        <div class="cert-title">Free Career Success Workshop on Skill-Based Full Stack Development</div>
+                        <div class="cert-org">POSTULATE</div>
+                        <div class="cert-date">📅 December 30, 2025 &nbsp;·&nbsp; C.No: 3760</div>
+                        <span class="cert-tag">ISO Certified</span>
+                    </div>
+                </div>
+
+                <!-- 7. IBM – Python 101 for Data Science -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0f62fe,#054ada);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🐍</div>
+                        <div class="cert-title">Python 101 for Data Science (PY0101EN)</div>
+                        <div class="cert-org">IBM / Cognitive Class</div>
+                        <div class="cert-date">📅 June 22, 2025</div>
+                        <span class="cert-tag">IBM Professional Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 8. Microsoft – Explore Generative AI -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0078d4,#00bcf2);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🌐</div>
+                        <div class="cert-title">Explore Generative AI</div>
+                        <div class="cert-org">Microsoft</div>
+                        <div class="cert-date">📅 September 4, 2025</div>
+                        <span class="cert-tag">Microsoft Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 9. Microsoft – Boost Productivity with Microsoft Copilot -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0078d4,#7b83eb);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🤝</div>
+                        <div class="cert-title">Boost Your Productivity with Microsoft Copilot</div>
+                        <div class="cert-org">Microsoft</div>
+                        <div class="cert-date">📅 September 4, 2025</div>
+                        <span class="cert-tag">Microsoft Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 10. Microsoft – Get Started with Microsoft Copilot -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0078d4,#4a90d9);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🚀</div>
+                        <div class="cert-title">Get Started with Microsoft Copilot</div>
+                        <div class="cert-org">Microsoft</div>
+                        <div class="cert-date">📅 September 8, 2025</div>
+                        <span class="cert-tag">Microsoft Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 11. MongoDB – CRUD Operations -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#13aa52,#0a7e3a);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🍃</div>
+                        <div class="cert-title">CRUD Operations in MongoDB</div>
+                        <div class="cert-org">MongoDB</div>
+                        <div class="cert-date">📅 October 01, 2025 &nbsp;·&nbsp; Credly Verified</div>
+                        <span class="cert-tag">MongoDB Skill Badge</span>
+                    </div>
+                </div>
+
+                <!-- 12. UiPath – Agentic Automation Developer Associate Training -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#f76b1c,#e8001b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🤖</div>
+                        <div class="cert-title">UiPath Academy Agentic Automation Developer Associate Training</div>
+                        <div class="cert-org">UiPath Academy</div>
+                        <div class="cert-date">📅 October 1, 2025</div>
+                        <span class="cert-tag">Diploma of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 13. UiPath – Build Your First Agent -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#e8001b,#f76b1c);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🧩</div>
+                        <div class="cert-title">Build Your First Agent with UiPath Studio Web</div>
+                        <div class="cert-org">UiPath</div>
+                        <div class="cert-date">📅 October 01, 2025</div>
+                        <span class="cert-tag">Diploma of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 14. UiPath – Variables & Arguments in Studio Web -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#e8001b,#c0392b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🔧</div>
+                        <div class="cert-title">Variables and Arguments in Studio Web</div>
+                        <div class="cert-org">UiPath</div>
+                        <div class="cert-date">📅 October 01, 2025</div>
+                        <span class="cert-tag">Diploma of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 15. UiPath – Control Flow in Studio Web -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#c0392b,#e8001b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🔁</div>
+                        <div class="cert-title">Control Flow in Studio Web</div>
+                        <div class="cert-org">UiPath</div>
+                        <div class="cert-date">📅 October 01, 2025</div>
+                        <span class="cert-tag">Diploma of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 16. UiPath – Introduction to BPMN Concepts -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#f76b1c,#c0392b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">📊</div>
+                        <div class="cert-title">Introduction to BPMN Concepts</div>
+                        <div class="cert-org">UiPath</div>
+                        <div class="cert-date">📅 October 01, 2025</div>
+                        <span class="cert-tag">Diploma of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 17. MathWorks – Statistics Onramp -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0076a8,#00aeef);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">📈</div>
+                        <div class="cert-title">Statistics Onramp</div>
+                        <div class="cert-org">MathWorks Training Services</div>
+                        <div class="cert-date">📅 October 1, 2025 &nbsp;·&nbsp; 100% Completed</div>
+                        <span class="cert-tag">Course Completion Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 18. MathWorks – Deep Learning Onramp -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0076a8,#1e8bc3);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🧬</div>
+                        <div class="cert-title">Deep Learning Onramp</div>
+                        <div class="cert-org">MathWorks Training Services</div>
+                        <div class="cert-date">📅 October 1, 2025 &nbsp;·&nbsp; 100% Completed</div>
+                        <span class="cert-tag">Course Completion Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 19. MathWorks – Machine Learning Onramp -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#00aeef,#0076a8);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">⚙️</div>
+                        <div class="cert-title">Machine Learning Onramp</div>
+                        <div class="cert-org">MathWorks Training Services</div>
+                        <div class="cert-date">📅 October 1, 2025 &nbsp;·&nbsp; 100% Completed</div>
+                        <span class="cert-tag">Course Completion Certificate</span>
+                    </div>
+                </div>
+
+                <!-- 20. Wadhwani – Self-Presentation Advanced -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#e84c1e,#f39c12);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🎤</div>
+                        <div class="cert-title">Self-Presentation — Advanced</div>
+                        <div class="cert-org">Wadhwani Foundation</div>
+                        <div class="cert-date">📅 October 02, 2025 &nbsp;·&nbsp; 2 Hours</div>
+                        <span class="cert-tag">Microcertificate of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 21. Sankara / Postulate – Data Informatics Practices -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#4a0072,#9b59b6);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">📋</div>
+                        <div class="cert-title">Add-on Course — Data Informatics Practices (35 hrs)</div>
+                        <div class="cert-org">Sankara College &amp; Postulate Info Tech</div>
+                        <div class="cert-date">📅 2024–2025 Academic Year &nbsp;·&nbsp; First Class</div>
+                        <span class="cert-tag">NAAC A+ Institution</span>
+                    </div>
+                </div>
+
+                <!-- 22. NoviTech – Retail Sales & Growth Analysis Dashboard -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#1c3a1c,#4a7c59);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🛒</div>
+                        <div class="cert-title">Retail Sales &amp; Growth Analysis Dashboard</div>
+                        <div class="cert-org">NoviTech R&amp;D Private Limited</div>
+                        <div class="cert-date">📅 September 13, 2025 &nbsp;·&nbsp; 2-Hour Bootcamp</div>
+                        <span class="cert-tag">Certificate of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 23. NoviTech – Power BI MasterClass -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#1a3566,#f2c811);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">📊</div>
+                        <div class="cert-title">21 Days MasterClass in Power BI</div>
+                        <div class="cert-org">NoviTech R&amp;D Private Limited</div>
+                        <div class="cert-date">📅 September 5 – September 29, 2025</div>
+                        <span class="cert-tag">Certificate of Completion</span>
+                    </div>
+                </div>
+
+                <!-- 24. Hindustan – Mathematics Silver Award -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#0d2b6e,#c9a800);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🥈</div>
+                        <div class="cert-title">Mathematics in Focus — Technical Event (Silver Award)</div>
+                        <div class="cert-org">Hindustan Institute of Technology &amp; Science</div>
+                        <div class="cert-date">📅 January 6, 2026 &nbsp;·&nbsp; Silver Level (75–89)</div>
+                        <span class="cert-tag">Certificate of Appreciation</span>
+                    </div>
+                </div>
+
+                <!-- 25. Sankara – Techno Hunt 2K26 -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#1a1a2e,#c8a84b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🏅</div>
+                        <div class="cert-title">Techno Hunt 2K26 — IV Place</div>
+                        <div class="cert-org">Sankara College of Science &amp; Commerce</div>
+                        <div class="cert-date">📅 February 06, 2026</div>
+                        <span class="cert-tag">Certificate of Appreciation</span>
+                    </div>
+                </div>
+
+                <!-- 26. Sankara – IKS Vedic Math Workshop -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#1e4d2b,#c8a84b);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">🧮</div>
+                        <div class="cert-title">IKS Workshop — Ancient Wisdom for Modern Speed: Vedic Math Intensive</div>
+                        <div class="cert-org">Sankara College of Science &amp; Commerce</div>
+                        <div class="cert-date">📅 February 10, 2026</div>
+                        <span class="cert-tag">Certificate of Participation</span>
+                    </div>
+                </div>
+
+                <!-- 27. TANSACS – State Level Quiz -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#c0392b,#f39c12);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">📝</div>
+                        <div class="cert-title">State Level Online Quiz Competition 2025</div>
+                        <div class="cert-org">TANSACS (Tamil Nadu State AIDS Control Society)</div>
+                        <div class="cert-date">📅 August 12, 2025</div>
+                        <span class="cert-tag">Certificate of Participation</span>
+                    </div>
+                </div>
+
+                <!-- 28. The Digital Adda – Digital Marketing -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#7f00ff,#3a86ff);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">📣</div>
+                        <div class="cert-title">Digital Marketing Professional Certification</div>
+                        <div class="cert-org">The Digital Adda</div>
+                        <div class="cert-date">📅 July 24, 2025 &nbsp;·&nbsp; ID: DA/DM/25/11482</div>
+                        <span class="cert-tag">Ministry of MSME · ISO Certified</span>
+                    </div>
+                </div>
+
+                <!-- 29. The Digital Adda – Data Center Virtualization -->
+                <div class="cert-card">
+                    <div class="cert-badge" style="background:linear-gradient(90deg,#3a86ff,#7f00ff);"></div>
+                    <div class="cert-body">
+                        <div class="cert-icon">☁️</div>
+                        <div class="cert-title">Data Center Virtualization</div>
+                        <div class="cert-org">The Digital Adda</div>
+                        <div class="cert-date">📅 July 24, 2025 &nbsp;·&nbsp; ID: DA/DCV/24/11366</div>
+                        <span class="cert-tag">Ministry of MSME · ISO Certified</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-achievements"></div>
+</section>
+
+<!-- ══ WORKSHOPS ════════════════════════════════════════════ -->
+<section id="pg-workshops" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Continuous Learning</p>
+            <h2 class="sec-title">Workshops &amp; Professional Training</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="ws-grid">
+            <!-- Institutional Workshops -->
+            <div class="ws-card">
+                <div class="ws-title">Flutter Development Program</div>
+                <div class="ws-org">Sankara College of Science &amp; Commerce — Dept. of CSDA</div>
+                <div class="ws-date">📅 February 24–26, 2025 · Cross-platform mobile development with Flutter &amp; Dart</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">IoT Display — National Science Day</div>
+                <div class="ws-org">Sankara College of Science &amp; Commerce — Dept. of CSDA</div>
+                <div class="ws-date">📅 February 28, 2025 · Hands-on IoT demonstration &amp; technical presentation</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">IKS Workshop — Vedic Math Intensive</div>
+                <div class="ws-org">Sankara College — Dept. of Mathematics</div>
+                <div class="ws-date">📅 February 10, 2026 · Ancient Wisdom for Modern Speed</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">Data Informatics Practices (35 hrs)</div>
+                <div class="ws-org">Sankara College &amp; Postulate Info Tech Pvt. Ltd.</div>
+                <div class="ws-date">📅 2024–25 Academic Year · Add-on Course · First Class</div>
+            </div>
+            <!-- Professional Training -->
+            <div class="ws-card">
+                <div class="ws-title">30 Days MasterClass — Artificial Intelligence</div>
+                <div class="ws-org">NoviTech R&amp;D Private Limited</div>
+                <div class="ws-date">📅 June 18 – July 23, 2025 · Hands-on AI development</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">21 Days MasterClass — Power BI</div>
+                <div class="ws-org">NoviTech R&amp;D Private Limited</div>
+                <div class="ws-date">📅 September 5–29, 2025 · Business Intelligence dashboards</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">2-Hour Bootcamp — Retail Sales &amp; Growth Analysis Dashboard</div>
+                <div class="ws-org">NoviTech R&amp;D Private Limited</div>
+                <div class="ws-date">📅 September 13, 2025 · Power BI dashboard design</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">2-Hour Bootcamp — Building Your First React Application</div>
+                <div class="ws-org">NoviTech R&amp;D Private Limited</div>
+                <div class="ws-date">📅 December 28, 2025 · Full-stack web development</div>
+            </div>
+            <!-- Workshops -->
+            <div class="ws-card">
+                <div class="ws-title">Free Career Workshop — Data Science &amp; AI</div>
+                <div class="ws-org">POSTULATE (ISO Certified)</div>
+                <div class="ws-date">📅 January 10, 2026 · Industry career guidance</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">Free Career Workshop — Full Stack Development</div>
+                <div class="ws-org">POSTULATE (ISO Certified)</div>
+                <div class="ws-date">📅 December 30, 2025 · Skill-based web development</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">Deloitte Technology Job Simulation</div>
+                <div class="ws-org">Deloitte Australia / Forage</div>
+                <div class="ws-date">📅 January 2026 · Dashboard design &amp; technical proposal writing</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">UiPath Academy — Agentic Automation Developer Associate Training</div>
+                <div class="ws-org">UiPath Academy</div>
+                <div class="ws-date">📅 October 1, 2025 · RPA, BPMN &amp; Studio Web</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">MathWorks Onramp Series — Statistics, Deep Learning &amp; Machine Learning</div>
+                <div class="ws-org">MathWorks Training Services</div>
+                <div class="ws-date">📅 October 1, 2025 · 3 courses · 100% completion each</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">Microsoft Copilot &amp; Generative AI Series</div>
+                <div class="ws-org">Microsoft</div>
+                <div class="ws-date">📅 September 2025 · 3 courses: Explore Gen AI, Boost Productivity, Get Started</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">Self-Presentation — Advanced</div>
+                <div class="ws-org">Wadhwani Foundation</div>
+                <div class="ws-date">📅 October 2, 2025 · 2-hour professional communication workshop</div>
+            </div>
+            <div class="ws-card">
+                <div class="ws-title">Mathematics in Focus — Technical Event</div>
+                <div class="ws-org">Hindustan Institute of Technology &amp; Science, Chennai</div>
+                <div class="ws-date">📅 January 6, 2026 · Silver Award (75–89 score range)</div>
+            </div>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-workshops"></div>
+</section>
+
+<!-- ══ LANGUAGES ════════════════════════════════════════════ -->
+<section id="pg-languages" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Communication</p>
+            <h2 class="sec-title">Languages</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="lang-grid">
+            <div class="lang-card"><div class="lang-name">Tamil</div><div class="lang-lvl">Read · Write · Speak</div></div>
+            <div class="lang-card"><div class="lang-name">English</div><div class="lang-lvl">Read · Write · Speak</div></div>
+            <div class="lang-card"><div class="lang-name">French</div><div class="lang-lvl">Read · Write</div></div>
+        <div class="lang-card"><div class="lang-name">Hindi</div><div class="lang-lvl">Read · Write</div></div>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-languages"></div>
+</section>
+
+<!-- ══ HOBBIES ═══════════════════════════════════════════════ -->
+<section id="pg-hobbies" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Beyond Data</p>
+            <h2 class="sec-title">Hobbies &amp; Interests</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="hob-row">
+            <div class="hob"><span class="hob-ico">📚</span> Reading<br><small style="color:var(--muted);font-size:.72rem;">Books, articles &amp; literature</small></div>
+            <div class="hob"><span class="hob-ico">💻</span> Coding<br><small style="color:var(--muted);font-size:.72rem;">Personal projects &amp; challenges</small></div>
+            <div class="hob"><span class="hob-ico">🎬</span> Editing<br><small style="color:var(--muted);font-size:.72rem;">Video &amp; photo editing</small></div>
+            <div class="hob"><span class="hob-ico">🎓</span> Learning<br><small style="color:var(--muted);font-size:.72rem;">Online courses &amp; workshops</small></div>
+            <div class="hob"><span class="hob-ico">📊</span> Data Storytelling<br><small style="color:var(--muted);font-size:.72rem;">Dashboards &amp; visualisations</small></div>
+            <div class="hob"><span class="hob-ico">🎨</span> UI Design<br><small style="color:var(--muted);font-size:.72rem;">Graphic &amp; interface design</small></div>
+            <div class="hob"><span class="hob-ico">🧩</span> Brain Puzzles<br><small style="color:var(--muted);font-size:.72rem;">Quizzes &amp; logic games</small></div>
+            <div class="hob"><span class="hob-ico">🌐</span> Exploring AI<br><small style="color:var(--muted);font-size:.72rem;">Latest tech &amp; AI trends</small></div>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-hobbies"></div>
+</section>
+
+<!-- ══ CONTACT ═══════════════════════════════════════════════ -->
+<section id="pg-contact" class="pg">
+    <div class="wrap">
+        <div class="sec-head">
+            <p class="sec-label">Let's Connect</p>
+            <h2 class="sec-title">Get In Touch</h2>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="ct-grid">
+            <a href="mailto:jeffrinaviviliya@gmail.com" class="ct-card">
+                <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                <div class="ct-lbl">Email</div>
+                <div class="ct-val">jeffrinaviviliya@gmail.com</div>
+            </a>
+            <a href="tel:+918838540526" class="ct-card">
+                <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+                <div class="ct-lbl">Phone</div>
+                <div class="ct-val">+91 88385 40526</div>
+            </a>
+            <a href="https://www.linkedin.com/in/jeffrina-v-39a0aa354" target="_blank" rel="noopener" class="ct-card">
+                <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.327-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+                <div class="ct-lbl">LinkedIn</div>
+                <div class="ct-val">in/jeffrina-v-39a0aa354</div>
+            </a>
+            <a href="https://github.com/Jeffrina-V" target="_blank" rel="noopener" class="ct-card">
+                <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+                <div class="ct-lbl">GitHub</div>
+                <div class="ct-val">github.com/Jeffrina-V</div>
+            </a>
+            <a href="https://jeffrina-v.github.io/jeffrina_portfolio.github.io/" target="_blank" rel="noopener" class="ct-card">
+                <div class="ct-ico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+                <div class="ct-lbl">Portfolio</div>
+                <div class="ct-val">jeffrina-v.github.io</div>
+            </a>
+        </div>
+    </div>
+    <div class="page-nav" id="nav-contact"></div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-inner">
+        <p class="footer-brand">Jeffrina <span>V</span></p>
+        <p class="footer-tagline">Aspiring Data Analyst &amp; Developer · Coimbatore, Tamil Nadu</p>
+        <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/jeffrina-v-39a0aa354" target="_blank" rel="noopener" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.327-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://github.com/Jeffrina-V" target="_blank" rel="noopener" title="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <a href="mailto:jeffrinaviviliya@gmail.com" title="Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+        </div>
+        <p class="footer-copy">© 2026 Jeffrina V &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; Crafted with <span style="color:#e05252;">♥</span></p>
+    </div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+<script>
+    const PAGES  = ['overview','about','education','experience','projects','skills','achievements','workshops','languages','hobbies','contact'];
+    const LABELS = ['Overview','About','Education','Experience','Projects','Skills','Achievements','Workshops','Languages','Hobbies','Contact'];
+
+    function go(name) {
+        PAGES.forEach(id => {
+            document.getElementById('pg-' + id)?.classList.remove('active');
+            document.getElementById('n-'  + id)?.classList.remove('active');
+        });
+        document.getElementById('pg-' + name)?.classList.add('active');
+        document.getElementById('n-'  + name)?.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        renderPageNav(name);
+    }
+
+    function renderPageNav(activeName) {
+        PAGES.forEach((id, i) => {
+            const el = document.getElementById('nav-' + id);
+            if (!el) return;
+            const hasPrev = i > 0;
+            const hasNext = i < PAGES.length - 1;
+            const prevPage  = hasPrev ? PAGES[i - 1]  : '';
+            const nextPage  = hasNext ? PAGES[i + 1]  : '';
+            const prevLabel = hasPrev ? LABELS[i - 1] : '';
+            const nextLabel = hasNext ? LABELS[i + 1] : '';
+            el.innerHTML = `
+                <button class="pnav-btn ${hasPrev ? '' : 'invisible'}" onclick="go('${prevPage}')">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+                    ${prevLabel}
+                </button>
+                <span class="page-nav-center">${LABELS[i]} &nbsp;&middot;&nbsp; ${i + 1} / ${PAGES.length}</span>
+                <button class="pnav-btn ${hasNext ? '' : 'invisible'}" onclick="go('${nextPage}')">
+                    ${nextLabel}
+                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+                </button>`;
+        });
+    }
+
+    // ── Typewriter effect ──────────────────────────────────────
+    const TYPE_PHRASES = [
+        'Aspiring Data Analyst',
+        'Python Developer',
+        'Power BI Expert',
+        'Tableau Visualiser',
+        'SQL Practitioner',
+        'AI & ML Enthusiast'
+    ];
+    let tIdx = 0, tChar = 0, tDeleting = false;
+    function typeLoop() {
+        const el = document.getElementById('type-text');
+        if (!el) return;
+        const phrase = TYPE_PHRASES[tIdx];
+        if (!tDeleting) {
+            el.textContent = phrase.slice(0, ++tChar);
+            if (tChar === phrase.length) {
+                tDeleting = true;
+                setTimeout(typeLoop, 1800);
+                return;
+            }
+            setTimeout(typeLoop, 68);
+        } else {
+            el.textContent = phrase.slice(0, --tChar);
+            if (tChar === 0) {
+                tDeleting = false;
+                tIdx = (tIdx + 1) % TYPE_PHRASES.length;
+                setTimeout(typeLoop, 320);
+                return;
+            }
+            setTimeout(typeLoop, 36);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Activate overview on load
+        go('overview');
+        typeLoop();
+
+        // Animate skill bars when skills page becomes visible
+        const skillsObserver = new MutationObserver(() => {
+            document.querySelectorAll('.sk-fill').forEach(el => {
+                el.classList.toggle('animate', document.getElementById('pg-skills')?.classList.contains('active'));
+            });
+        });
+        const pgSkills = document.getElementById('pg-skills');
+        if (pgSkills) skillsObserver.observe(pgSkills, { attributes: true, attributeFilter: ['class'] });
+
+        // Scroll-top button
+        const btn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            btn?.classList.toggle('vis', window.scrollY > 300);
+        });
+
+        // Hamburger / mobile nav toggle
+        const ham  = document.getElementById('ham');
+        const menu = document.getElementById('nav-menu');
+        if (ham && menu) {
+            ham.addEventListener('click', () => {
+                menu.classList.toggle('open');
+                ham.setAttribute('aria-expanded', menu.classList.contains('open'));
+            });
+        }
+    });
+</script>
+</body>
+</html>
